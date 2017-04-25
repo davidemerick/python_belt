@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+        {% load staticfiles %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+
+      <!--<script  type='text/javascript' src='javascript/jquery-1.11.1.min.js'>-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script  type='text/javascript' src='web.js'></script>
+      <link rel="stylesheet" href="{% static 'Travel_Buddy/css/bootstrap.min.css' %}"media="screen" title="no title"  charset="utf-8">
+      </head>
+    <body>
+      {% if user.is_authenticated %}
+          <p>Welcome, {{ user.username }}.</p>
+      {% endif %}
+      <a href="{% url 'login-reg:process_logout' %}"> Logout</a> <br>
+      <a href="{% url 'travel-buddy:render_add' %}"> Add Travel Plan </a> <br>
+
+      <h4>Your Trip Schedules</h4>
+      {% for info in displayUserTrips %}
+        <br>
+        <tr>
+          <td>Destination: <a href="{% url 'travel-buddy:render_trip' trip_to_view=info.id %}"> {{ info.destination }} </a></td> <br>
+          <td>Travel Start:{{ info.travel_start }}</td> <br>
+          <td>Travel End:{{ info.travel_end }}</td> <br>
+          <td>Description:{{ info.description }}</td> <br>
+        </tr>
+      {% endfor %}
+
+      {% for info in displayTravelerTrips %}
+        <br>
+        <tr>
+          <td>Destination: <a href="{% url 'travel-buddy:render_trip' trip_to_view=info.id %}"> {{ info.destination }} </a></td> <br>
+          <td>Travel Start:{{ info.travel_start }}</td> <br>
+          <td>Travel End:{{ info.travel_end }}</td> <br>
+          <td>Description:{{ info.description }}</td> <br>
+        </tr>
+      {% endfor %}
+
+      <h4>Other Trip Schedules</h4>
+      {% for info in displayOtherTrips %}
+        <br>
+        <tr>
+            {% for test in allUsers %}
+              {% if test.id == info.user_id %}
+          <td>Name:{{ test.username}}</td> <br>
+              {% endif %}
+            {% endfor %}
+          <td>Destination:<a href="{% url 'travel-buddy:render_trip' trip_to_view=info.id %}"> {{ info.destination }} </a></td> <br>
+          <td>Travel Start:{{ info.travel_start }}</td> <br>
+          <td>Travel End:{{ info.travel_end }}</td> <br>
+          <td><a href="{% url 'travel-buddy:process_join' trip_to_join=info.id %}"> Join Trip </a>
+        </tr>
+        <br>
+      {% endfor %}
+
+
+
+    </body>
