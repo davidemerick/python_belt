@@ -4,10 +4,14 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Trips
+# use ModelForm factory to create forms
+# put logic in model space
+from django.forms import modelform_factory
 
 
 """
 TODO for Book_Reviews: forms.py
+- Don't repeat yourself, use form to edit model instances
 -
 """
 ## Model-based forms
@@ -39,8 +43,6 @@ class TripCreateForm(forms.ModelForm):
         trip.travelers = traveler_to_add.id
         trip.save()
         return trip
-
-
 
 ## Forms
 ## Extending the Django AuthenticationForm class

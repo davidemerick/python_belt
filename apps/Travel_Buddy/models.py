@@ -14,6 +14,14 @@ Extend User to show understanding of Django
 # using User class
 # todo: extend User class to show understanding of django MTV
 class Trips(models.Model):
+    """
+    #Relations
+    #Attributes
+    #Manager
+    #Functions/methods
+    #Meta
+
+    """
     # for created by
     # user = models.ForeignKey(User)
     #related_name='users_who_joined'

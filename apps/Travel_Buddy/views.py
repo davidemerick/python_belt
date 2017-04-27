@@ -31,18 +31,7 @@ def render_home(request):
     }
     return render(request, "Travel_Buddy/travels.html", context)
 
-def process_trip_join(request, trip_to_join):
-    print "routed to process_trip_join"
-    # print trip_to_join
-    # tripToJoin = Trips.objects.get(id=trip_to_join)
-    # print tripToJoin
-    # current_user = request.user
-    # print current_user.id
-    # userToAdd = User.objects.get(id=request.user.id)
-    # tripToJoin.travelers.add(userToAdd)
-    # print tripToJoin.travelers
 
-    return redirect(reverse('travel-buddy:render_home'))
 
 def render_trip_view(request, trip_to_view):
     print "routed to render_trip_view"
@@ -85,22 +74,45 @@ def process_add(request):
     return redirect(reverse('travel-buddy:render_home'))
 
 
-    def process_trip_join(request, trip_to_join):
-        print "routed to process_trip_join"
+def process_trip_join(request, trip_to_join):
+    print "routed to process_trip_join"
 
-        # print trip_to_join
-        tripToJoin = Trips.objects.get(id=trip_to_join)
-        userToAdd = User.objects.get(id=request.user.id)
+    # print trip_to_join
+    tripToJoin = Trips.objects.get(id=trip_to_join)
+    userToAdd = User.objects.get(id=request.user.id)
 
-        tripToEdit = TripCreateForm(instance=tripToJoin)
-        tripToEdit.process_traveler(userToAdd)
-        # TripCreateForm.process_traveler(instance=tripToJoin,traveler_to_add=userToAdd)
-        print "process complete?"
-        # print tripToJoin
-        # current_user = request.user
-        # print current_user.id
+    tripToEdit = TripCreateForm(instance=tripToJoin)
+    tripToEdit.process_traveler(userToAdd)
+    # TripCreateForm.process_traveler(instance=tripToJoin,traveler_to_add=userToAdd)
+    print "process complete?"
+    # print tripToJoin
+    # current_user = request.user
+    # print current_user.id
 
-        #tripToJoin.travelers = userToAdd.id
-        # print tripToJoin.travelers
+    #tripToJoin.travelers = userToAdd.id
+    # print tripToJoin.travelers
 
-        return redirect(reverse('travel-buddy:render_home'))
+    return redirect(reverse('travel-buddy:render_home'))
+
+        # def process_trip_join(request, trip_to_join):
+        #     print "routed to process_trip_join"
+        #     # print trip_to_join
+        #     # tripToJoin = Trips.objects.get(id=trip_to_join)
+        #     # print tripToJoin
+        #     # current_user = request.user
+        #     # print current_user.id
+        #     # userToAdd = User.objects.get(id=request.user.id)
+        #     # tripToJoin.travelers.add(userToAdd)
+        #     # print tripToJoin.travelers
+        #
+        #     return redirect(reverse('travel-buddy:render_home'))
+
+# def travels(request, userid, route):
+#     user = User.object.get(id=userid)
+#     context = {
+#     "user" : User.object.get(id=userid),
+#     "route" : route,
+#     "itinerary" : Trip.objects.filter(created_by=user)|Trip.objects.filter(attendees=user),
+#     "otherplans" : Trip.objects.exclude(created_by=user).exclude(attendees=user)
+#     }
+#     return render(request, "travel_app/travels.html", context)
